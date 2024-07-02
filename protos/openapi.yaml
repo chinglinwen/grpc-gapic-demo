@@ -5,57 +5,32 @@ openapi: 3.0.3
 info:
     title: LibraryService API
     description: |-
-        This API represents a simple digital library. It lets you manage Shelf
-         resources and Book resources in the library. It defines the following
+        This API represents a simple digital library. It lets you manage Server
+         resources and Disk resources in the library. It defines the following
          resource model:
 
-         - The API has a collection of [Shelf][google.example.library.v1.Shelf]
-           resources, named `shelves/*`
+         - The API has a collection of [Server][google.example.library.v1.Server]
+           resources, named `servers/*`
 
-         - Each Shelf has a collection of [Book][google.example.library.v1.Book]
-           resources, named `shelves/*/books/*`
+         - Each Server has a collection of [Disk][google.example.library.v1.Disk]
+           resources, named `servers/*/disks/*`
     version: 0.0.1
 servers:
-    - url: https://library-example.googleapis.com
+    - url: https://core.wcloud.io
 paths:
-    /v1/foos:
-        post:
-            tags:
-                - LibraryService
-            description: Creates a foo, and returns the new Foo.
-            operationId: LibraryService_CreateFoo
-            requestBody:
-                content:
-                    application/json:
-                        schema:
-                            $ref: '#/components/schemas/Foo'
-                required: true
-            responses:
-                "200":
-                    description: OK
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Foo'
-                default:
-                    description: Default error response
-                    content:
-                        application/json:
-                            schema:
-                                $ref: '#/components/schemas/Status'
-    /v1/shelves:
+    /v1/servers:
         get:
             tags:
                 - LibraryService
             description: |-
-                Lists shelves. The order is unspecified but deterministic. Newly created
-                 shelves will not necessarily be added to the end of this list.
-            operationId: LibraryService_ListShelves
+                Lists servers. The order is unspecified but deterministic. Newly created
+                 servers will not necessarily be added to the end of this list.
+            operationId: LibraryService_Listservers
             parameters:
                 - name: pageSize
                   in: query
                   description: |-
-                    Requested page size. Server may return fewer shelves than requested.
+                    Requested page size. Server may return fewer servers than requested.
                      If unspecified, server will pick an appropriate default.
                   schema:
                     type: integer
@@ -65,8 +40,8 @@ paths:
                   description: |-
                     A token identifying a page of results the server should return.
                      Typically, this is the value of
-                     [ListShelvesResponse.next_page_token][google.example.library.v1.ListShelvesResponse.next_page_token]
-                     returned from the previous call to `ListShelves` method.
+                     [ListserversResponse.next_page_token][google.example.library.v1.ListserversResponse.next_page_token]
+                     returned from the previous call to `Listservers` method.
                   schema:
                     type: string
             responses:
@@ -75,7 +50,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ListShelvesResponse'
+                                $ref: '#/components/schemas/ListServersResponse'
                 default:
                     description: Default error response
                     content:
@@ -85,13 +60,13 @@ paths:
         post:
             tags:
                 - LibraryService
-            description: Creates a shelf, and returns the new Shelf.
-            operationId: LibraryService_CreateShelf
+            description: Creates a server, and returns the new Server.
+            operationId: LibraryService_CreateServer
             requestBody:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Shelf'
+                            $ref: '#/components/schemas/Server'
                 required: true
             responses:
                 "200":
@@ -99,23 +74,23 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Shelf'
+                                $ref: '#/components/schemas/Server'
                 default:
                     description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1/shelves/{shelf}:
+    /v1/servers/{server}:
         get:
             tags:
                 - LibraryService
-            description: Gets a shelf. Returns NOT_FOUND if the shelf does not exist.
-            operationId: LibraryService_GetShelf
+            description: Gets a server. Returns NOT_FOUND if the server does not exist.
+            operationId: LibraryService_GetServer
             parameters:
-                - name: shelf
+                - name: server
                   in: path
-                  description: The shelf id.
+                  description: The server id.
                   required: true
                   schema:
                     type: string
@@ -125,7 +100,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Shelf'
+                                $ref: '#/components/schemas/Server'
                 default:
                     description: Default error response
                     content:
@@ -135,12 +110,12 @@ paths:
         delete:
             tags:
                 - LibraryService
-            description: Deletes a shelf. Returns NOT_FOUND if the shelf does not exist.
-            operationId: LibraryService_DeleteShelf
+            description: Deletes a server. Returns NOT_FOUND if the server does not exist.
+            operationId: LibraryService_DeleteServer
             parameters:
-                - name: shelf
+                - name: server
                   in: path
-                  description: The shelf id.
+                  description: The server id.
                   required: true
                   schema:
                     type: string
@@ -154,26 +129,26 @@ paths:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1/shelves/{shelf}/books:
+    /v1/servers/{server}/disks:
         get:
             tags:
                 - LibraryService
             description: |-
-                Lists books in a shelf. The order is unspecified but deterministic. Newly
-                 created books will not necessarily be added to the end of this list.
-                 Returns NOT_FOUND if the shelf does not exist.
-            operationId: LibraryService_ListBooks
+                Lists disks in a server. The order is unspecified but deterministic. Newly
+                 created disks will not necessarily be added to the end of this list.
+                 Returns NOT_FOUND if the server does not exist.
+            operationId: LibraryService_ListDisks
             parameters:
-                - name: shelf
+                - name: server
                   in: path
-                  description: The shelf id.
+                  description: The server id.
                   required: true
                   schema:
                     type: string
                 - name: pageSize
                   in: query
                   description: |-
-                    Requested page size. Server may return fewer books than requested.
+                    Requested page size. Server may return fewer disks than requested.
                      If unspecified, server will pick an appropriate default.
                   schema:
                     type: integer
@@ -183,8 +158,8 @@ paths:
                   description: |-
                     A token identifying a page of results the server should return.
                      Typically, this is the value of
-                     [ListBooksResponse.next_page_token][google.example.library.v1.ListBooksResponse.next_page_token].
-                     returned from the previous call to `ListBooks` method.
+                     [ListDisksResponse.next_page_token][google.example.library.v1.ListDisksResponse.next_page_token].
+                     returned from the previous call to `ListDisks` method.
                   schema:
                     type: string
             responses:
@@ -193,7 +168,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/ListBooksResponse'
+                                $ref: '#/components/schemas/ListDisksResponse'
                 default:
                     description: Default error response
                     content:
@@ -203,12 +178,12 @@ paths:
         post:
             tags:
                 - LibraryService
-            description: Creates a book, and returns the new Book.
-            operationId: LibraryService_CreateBook
+            description: Creates a book, and returns the new Disk.
+            operationId: LibraryService_CreateDisk
             parameters:
-                - name: shelf
+                - name: server
                   in: path
-                  description: The shelf id.
+                  description: The server id.
                   required: true
                   schema:
                     type: string
@@ -216,7 +191,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Book'
+                            $ref: '#/components/schemas/Disk'
                 required: true
             responses:
                 "200":
@@ -224,29 +199,29 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Book'
+                                $ref: '#/components/schemas/Disk'
                 default:
                     description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1/shelves/{shelf}/books/{book}:
+    /v1/servers/{server}/disks/{disk}:
         get:
             tags:
                 - LibraryService
             description: Gets a book. Returns NOT_FOUND if the book does not exist.
-            operationId: LibraryService_GetBook
+            operationId: LibraryService_GetDisk
             parameters:
-                - name: shelf
+                - name: server
                   in: path
-                  description: The shelf id.
+                  description: The server id.
                   required: true
                   schema:
                     type: string
-                - name: book
+                - name: disk
                   in: path
-                  description: The book id.
+                  description: The disk id.
                   required: true
                   schema:
                     type: string
@@ -256,7 +231,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Book'
+                                $ref: '#/components/schemas/Disk'
                 default:
                     description: Default error response
                     content:
@@ -267,17 +242,17 @@ paths:
             tags:
                 - LibraryService
             description: Deletes a book. Returns NOT_FOUND if the book does not exist.
-            operationId: LibraryService_DeleteBook
+            operationId: LibraryService_DeleteDisk
             parameters:
-                - name: shelf
+                - name: server
                   in: path
-                  description: The shelf id.
+                  description: The server id.
                   required: true
                   schema:
                     type: string
-                - name: book
+                - name: disk
                   in: path
-                  description: The book id.
+                  description: The disk id.
                   required: true
                   schema:
                     type: string
@@ -297,17 +272,17 @@ paths:
             description: |-
                 Updates a book. Returns INVALID_ARGUMENT if the name of the book
                  is non-empty and does not equal the existing name.
-            operationId: LibraryService_UpdateBook
+            operationId: LibraryService_UpdateDisk
             parameters:
-                - name: shelf
+                - name: server
                   in: path
-                  description: The shelf id.
+                  description: The server id.
                   required: true
                   schema:
                     type: string
-                - name: book
+                - name: disk
                   in: path
-                  description: The book id.
+                  description: The disk id.
                   required: true
                   schema:
                     type: string
@@ -321,7 +296,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/Book'
+                            $ref: '#/components/schemas/Disk'
                 required: true
             responses:
                 "200":
@@ -329,31 +304,31 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Book'
+                                $ref: '#/components/schemas/Disk'
                 default:
                     description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1/shelves/{shelf}/books/{book}:move:
+    /v1/servers/{server}/disks/{disk}:move:
         post:
             tags:
                 - LibraryService
             description: |-
-                Moves a book to another shelf, and returns the new book. The book
+                Moves a book to another server, and returns the new book. The book
                  id of the new book may not be the same as the original book.
-            operationId: LibraryService_MoveBook
+            operationId: LibraryService_MoveDisk
             parameters:
-                - name: shelf
+                - name: server
                   in: path
-                  description: The shelf id.
+                  description: The server id.
                   required: true
                   schema:
                     type: string
-                - name: book
+                - name: disk
                   in: path
-                  description: The book id.
+                  description: The disk id.
                   required: true
                   schema:
                     type: string
@@ -361,7 +336,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/MoveBookRequest'
+                            $ref: '#/components/schemas/MoveDiskRequest'
                 required: true
             responses:
                 "200":
@@ -369,30 +344,30 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Book'
+                                $ref: '#/components/schemas/Disk'
                 default:
                     description: Default error response
                     content:
                         application/json:
                             schema:
                                 $ref: '#/components/schemas/Status'
-    /v1/shelves/{shelf}:merge:
+    /v1/servers/{server}:merge:
         post:
             tags:
                 - LibraryService
             description: |-
-                Merges two shelves by adding all books from the shelf named
-                 `other_shelf_name` to shelf `name`, and deletes
-                 `other_shelf_name`. Returns the updated shelf.
-                 The book ids of the moved books may not be the same as the original books.
+                Merges two servers by adding all disks from the server named
+                 `other_server_name` to server `name`, and deletes
+                 `other_server_name`. Returns the updated server.
+                 The book ids of the moved disks may not be the same as the original disks.
 
-                 Returns NOT_FOUND if either shelf does not exist.
-                 This call is a no-op if the specified shelves are the same.
-            operationId: LibraryService_MergeShelves
+                 Returns NOT_FOUND if either server does not exist.
+                 This call is a no-op if the specified servers are the same.
+            operationId: LibraryService_MergeServers
             parameters:
-                - name: shelf
+                - name: server
                   in: path
-                  description: The shelf id.
+                  description: The server id.
                   required: true
                   schema:
                     type: string
@@ -400,7 +375,7 @@ paths:
                 content:
                     application/json:
                         schema:
-                            $ref: '#/components/schemas/MergeShelvesRequest'
+                            $ref: '#/components/schemas/MergeserversRequest'
                 required: true
             responses:
                 "200":
@@ -408,7 +383,7 @@ paths:
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/Shelf'
+                                $ref: '#/components/schemas/Server'
                 default:
                     description: Default error response
                     content:
@@ -417,14 +392,14 @@ paths:
                                 $ref: '#/components/schemas/Status'
 components:
     schemas:
-        Book:
+        Disk:
             type: object
             properties:
                 name:
                     type: string
                     description: |-
                         The resource name of the book.
-                         Book names have the form `shelves/{shelf_id}/books/{book_id}`.
+                         Disk names have the form `servers/{server_id}/disks/{book_id}`.
                          The name is ignored when creating a book.
                 author:
                     type: string
@@ -436,19 +411,6 @@ components:
                     type: boolean
                     description: Value indicating whether the book has been read.
             description: A single book in the library.
-        Foo:
-            type: object
-            properties:
-                name:
-                    type: string
-                    description: |-
-                        The resource name of the shelf.
-                         Shelf names have the form `shelves/{shelf_id}`.
-                         The name is ignored when creating a shelf.
-                theme:
-                    type: string
-                    description: The theme of the foo
-            description: A Shelf contains a collection of books with a theme.
         GoogleProtobufAny:
             type: object
             properties:
@@ -457,83 +419,83 @@ components:
                     description: The type of the serialized message.
             additionalProperties: true
             description: Contains an arbitrary serialized message along with a @type that describes the type of the serialized message.
-        ListBooksResponse:
+        ListDisksResponse:
             type: object
             properties:
-                books:
+                disks:
                     type: array
                     items:
-                        $ref: '#/components/schemas/Book'
-                    description: The list of books.
+                        $ref: '#/components/schemas/Disk'
+                    description: The list of disks.
                 nextPageToken:
                     type: string
                     description: |-
                         A token to retrieve next page of results.
                          Pass this value in the
-                         [ListBooksRequest.page_token][google.example.library.v1.ListBooksRequest.page_token]
-                         field in the subsequent call to `ListBooks` method to retrieve the next
+                         [ListDisksRequest.page_token][google.example.library.v1.ListDisksRequest.page_token]
+                         field in the subsequent call to `ListDisks` method to retrieve the next
                          page of results.
-            description: Response message for LibraryService.ListBooks.
-        ListShelvesResponse:
+            description: Response message for LibraryService.ListDisks.
+        ListServersResponse:
             type: object
             properties:
-                shelves:
+                servers:
                     type: array
                     items:
-                        $ref: '#/components/schemas/Shelf'
-                    description: The list of shelves.
+                        $ref: '#/components/schemas/Server'
+                    description: The list of servers.
                 nextPageToken:
                     type: string
                     description: |-
                         A token to retrieve next page of results.
                          Pass this value in the
-                         [ListShelvesRequest.page_token][google.example.library.v1.ListShelvesRequest.page_token]
-                         field in the subsequent call to `ListShelves` method to retrieve the next
+                         [ListserversRequest.page_token][google.example.library.v1.ListserversRequest.page_token]
+                         field in the subsequent call to `Listservers` method to retrieve the next
                          page of results.
-            description: Response message for LibraryService.ListShelves.
-        MergeShelvesRequest:
+            description: Response message for LibraryService.Listservers.
+        MergeserversRequest:
             required:
                 - name
-                - otherShelf
+                - otherServer
             type: object
             properties:
                 name:
                     type: string
-                    description: The name of the shelf we're adding books to.
-                otherShelf:
+                    description: The name of the server we're adding disks to.
+                otherServer:
                     type: string
-                    description: The name of the shelf we're removing books from and deleting.
+                    description: The name of the server we're removing disks from and deleting.
             description: |-
-                Describes the shelf being removed (other_shelf_name) and updated
+                Describes the server being removed (other_server_name) and updated
                  (name) in this merge.
-        MoveBookRequest:
+        MoveDiskRequest:
             required:
                 - name
-                - otherShelfName
+                - otherServerName
             type: object
             properties:
                 name:
                     type: string
                     description: The name of the book to move.
-                otherShelfName:
+                otherServerName:
                     type: string
-                    description: The name of the destination shelf.
+                    description: The name of the destination server.
             description: |-
-                Describes what book to move (name) and what shelf we're moving it
-                 to (other_shelf_name).
-        Shelf:
+                Describes what book to move (name) and what server we're moving it
+                 to (other_server_name).
+        Server:
             type: object
             properties:
                 name:
                     type: string
                     description: |-
-                        The resource name of the shelf.
-                         Shelf names have the form `shelves/{shelf_id}`.
-                         The name is ignored when creating a shelf.
+                        The resource name of the server.
+                         Server names have the form `servers/{server_id}`.
+                         The name is ignored when creating a server.
                 theme:
                     type: string
-                    description: The theme of the shelf
-            description: A Shelf contains a collection of books with a theme.
+                    description: The theme of the server
+            description: A Server contains a collection of disks with a theme.
         Status:
             type: object
             properties:
