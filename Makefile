@@ -7,7 +7,7 @@ build:
 	go build -o bin/cli generated/cli/*.go
 
 .PHONY: generate
-generate: grpcgen gapicgen gencli genrest
+generate: grpcgen gapicgen gencli genrest genopenapiyaml
 
 .PHONY: grpcgen
 grpcgen:
@@ -15,7 +15,11 @@ grpcgen:
 	protoc -I /home/wen/soft/googleapis \
 	--go_out=generated/grpcgen \
 	--go_opt=paths=source_relative \
-    --go-grpc_out=generated/grpcgen --go-grpc_opt=paths=source_relative \
+    --go-grpc_out=generated/grpcgen \
+	--go-grpc_opt=paths=source_relative \
+	--grpc-gateway_out=generated/grpcgen \
+	--grpc-gateway_opt=paths=source_relative \
+	--grpc-gateway_opt=generate_unbound_methods=true \
     --proto_path=protos \
 	protos/server.proto
 
@@ -25,16 +29,16 @@ gapicgen:
 	mkdir -p generated/gapicgen
 	protoc -I /home/wen/soft/googleapis \
 		--go_gapic_out=generated/gapicgen \
-		--go_gapic_opt='go-gapic-package=apidemo.io/generated/gapicgen/library;library' \
+		--go_gapic_opt='go-gapic-package=core.wcloud.io/generated/gapicgen/server;server' \
 		--go_gapic_opt=transport=grpc+rest \
 		--proto_path=protos protos/server.proto
-	mv generated/gapicgen/apidemo.io/generated/gapicgen/library/ generated/gapicgen
-	rm -r generated/gapicgen/apidemo.io
-	#hack/doreplace.sh google.golang.org/genproto/googleapis/example/library/v1 apidemo.io/generated/grpcgen
-	#hack/doreplace.sh apidemo.io/generated/grpcgen apidemo.io/generated/grpcgen
-	hack/doreplace.sh apidemo.io/generated/grpcgen apidemo.io/generated/grpcgen
-	#sed -i 's,apidemo.io/generated/grpcgen,apidemo.io/generated/grpcgen,g' generated/gapicgen/library/library_client.go
-	#sed -i 's,apidemo.io/generated/grpcgen,apidemo.io/generated/grpcgen,g' generated/gapicgen/library/auxiliary.go
+	mv generated/gapicgen/core.wcloud.io/generated/gapicgen/server/ generated/gapicgen
+	rm -r generated/gapicgen/core.wcloud.io
+	#hack/doreplace.sh google.golang.org/genproto/googleapis/example/server/v1 core.wcloud.io/generated/grpcgen
+	#hack/doreplace.sh core.wcloud.io/generated/grpcgen core.wcloud.io/generated/grpcgen
+	hack/doreplace.sh core.wcloud.io/generated/grpcgen core.wcloud.io/generated/grpcgen
+	#sed -i 's,core.wcloud.io/generated/grpcgen,core.wcloud.io/generated/grpcgen,g' generated/gapicgen/server/server_client.go
+	#sed -i 's,core.wcloud.io/generated/grpcgen,core.wcloud.io/generated/grpcgen,g' generated/gapicgen/server/auxiliary.go
 
 .PHONY: gencli
 gencli:
@@ -43,13 +47,14 @@ gencli:
 		--experimental_allow_proto3_optional \
 		--proto_path=protos \
 		--go_cli_out=generated/cli \
-		--go_cli_opt=gapic=apidemo.io/generated/gapicgen/library \
+		--go_cli_opt=gapic=core.wcloud.io/generated/gapicgen/server \
 		--go_cli_opt=fmt=false \
 		--go_cli_opt=root=apidemo \
 		protos/server.proto
-	sed -i 's,gapic.LibraryClient,gapic.Client,g'  generated/cli/library_service.go
-	sed -i 's,gapic.NewLibraryClient,gapic.NewClient,g'  generated/cli/library_service.go
+	sed -i 's,gapic.ServerClient,gapic.Client,g'  generated/cli/server_service.go
+	sed -i 's,gapic.NewServerClient,gapic.NewClient,g'  generated/cli/server_service.go
 
+# ln -sf $HOME/github/googleapis/gapic-showcase/schema .
 .PHONY: genrest
 genrest:
 	# cp -r ~/github/googleapis/gapic-showcase/schema .
@@ -59,11 +64,11 @@ genrest:
 		--proto_path=protos \
 		--go_rest_server_out=generated/genrest \
 		protos/server.proto
-	sed -i 's,github.com/googleapis/gapic-showcase/server/services,apidemo.io/server/services,g' generated/genrest/genrest.go
+	sed -i 's,github.com/googleapis/gapic-showcase/server/services,core.wcloud.io/server/services,g' generated/genrest/genrest.go
 	sed -i '/Location/d' generated/genrest/genrest.go
 	sed -i '/Permission/d' generated/genrest/genrest.go
 	sed -i '/Policy/d' generated/genrest/genrest.go
-	sed -i 's,apidemo.io/generated/grpcgen,apidemo.io/generated/grpcgen,g' generated/genrest/libraryservice.go
+	sed -i 's,core.wcloud.io/generated/grpcgen,core.wcloud.io/generated/grpcgen,g' generated/genrest/serverservice.go
 	mv -f generated/genrest/iampolicy.go generated/genrest/iampolicy.go.bak || :
 	mv -f generated/genrest/locations.go generated/genrest/locations.go.bak || :
 	
@@ -77,7 +82,7 @@ genrest:
 #		--go_cli_opt=root=apidemo \
 
 #		--go_gapic_out=generated/gapicgen \
-#		--go_gapic_opt=go-gapic-package=apidemo.io/generated/gapicgen/library;library \
+#		--go_gapic_opt=go-gapic-package=core.wcloud.io/generated/gapicgen/server;server \
 #		--go_gapic_opt=metadata \
 #		--go_gapic_opt=transport=grpc+rest \
 
@@ -88,10 +93,10 @@ genrest2:
 		--experimental_allow_proto3_optional \
 		--proto_path=protos \
 		--go_cli_out=generated/cli \
-		--go_cli_opt=gapic=apidemo.io/generated/gapicgen/library \
+		--go_cli_opt=gapic=core.wcloud.io/generated/gapicgen/server \
 		--go_cli_opt=fmt=false \
 		--go_gapic_out=generated/gapicgen \
-		--go_gapic_opt='go-gapic-package=apidemo.io/generated/gapicgen/library;library' \
+		--go_gapic_opt='go-gapic-package=core.wcloud.io/generated/gapicgen/server;server' \
 		--go_gapic_opt=metadata \
 		--go_gapic_opt=transport=grpc+rest \
 		--go_rest_server_out=generated/genrest \

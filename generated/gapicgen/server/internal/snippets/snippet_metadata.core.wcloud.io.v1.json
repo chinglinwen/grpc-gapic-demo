@@ -1,0 +1,519 @@
+{
+  "clientLibrary": {
+    "name": "core.wcloud.io/generated/gapicgen/server",
+    "version": "$VERSION",
+    "language": "GO",
+    "apis": [
+      {
+        "id": "core.wcloud.io.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "regionTag": "core_v1_generated_ServerService_CreateDisk_sync",
+      "title": "core CreateDisk Sample",
+      "description": "CreateDisk creates a book, and returns the new Disk.",
+      "file": "Client/CreateDisk/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "CreateDisk",
+        "fullName": "core.wcloud.io.v1.Client.CreateDisk",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.CreateDiskRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "resultType": "*serverpb.Disk",
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "CreateDisk",
+          "fullName": "core.wcloud.io.v1.ServerService.CreateDisk",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "regionTag": "core_v1_generated_ServerService_CreateServer_sync",
+      "title": "core CreateServer Sample",
+      "description": "CreateServer creates a server, and returns the new Server.",
+      "file": "Client/CreateServer/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "CreateServer",
+        "fullName": "core.wcloud.io.v1.Client.CreateServer",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.CreateServerRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "resultType": "*serverpb.Server",
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "CreateServer",
+          "fullName": "core.wcloud.io.v1.ServerService.CreateServer",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "regionTag": "core_v1_generated_ServerService_DeleteDisk_sync",
+      "title": "core DeleteDisk Sample",
+      "description": "DeleteDisk deletes a book. Returns NOT_FOUND if the book does not exist.",
+      "file": "Client/DeleteDisk/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "DeleteDisk",
+        "fullName": "core.wcloud.io.v1.Client.DeleteDisk",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.DeleteDiskRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "DeleteDisk",
+          "fullName": "core.wcloud.io.v1.ServerService.DeleteDisk",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 51,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "regionTag": "core_v1_generated_ServerService_DeleteServer_sync",
+      "title": "core DeleteServer Sample",
+      "description": "DeleteServer deletes a server. Returns NOT_FOUND if the server does not exist.",
+      "file": "Client/DeleteServer/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "DeleteServer",
+        "fullName": "core.wcloud.io.v1.Client.DeleteServer",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.DeleteServerRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "DeleteServer",
+          "fullName": "core.wcloud.io.v1.ServerService.DeleteServer",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 51,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "regionTag": "core_v1_generated_ServerService_GetDisk_sync",
+      "title": "core GetDisk Sample",
+      "description": "GetDisk gets a book. Returns NOT_FOUND if the book does not exist.",
+      "file": "Client/GetDisk/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "GetDisk",
+        "fullName": "core.wcloud.io.v1.Client.GetDisk",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.GetDiskRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "resultType": "*serverpb.Disk",
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "GetDisk",
+          "fullName": "core.wcloud.io.v1.ServerService.GetDisk",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "regionTag": "core_v1_generated_ServerService_GetServer_sync",
+      "title": "core GetServer Sample",
+      "description": "GetServer gets a server. Returns NOT_FOUND if the server does not exist.",
+      "file": "Client/GetServer/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "GetServer",
+        "fullName": "core.wcloud.io.v1.Client.GetServer",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.GetServerRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "resultType": "*serverpb.Server",
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "GetServer",
+          "fullName": "core.wcloud.io.v1.ServerService.GetServer",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "regionTag": "core_v1_generated_ServerService_ListDisks_sync",
+      "title": "core ListDisks Sample",
+      "description": "ListDisks lists disks in a server. The order is unspecified but deterministic. Newly\ncreated disks will not necessarily be added to the end of this list.\nReturns NOT_FOUND if the server does not exist.",
+      "file": "Client/ListDisks/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "ListDisks",
+        "fullName": "core.wcloud.io.v1.Client.ListDisks",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.ListDisksRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "resultType": "DiskIterator",
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "ListDisks",
+          "fullName": "core.wcloud.io.v1.ServerService.ListDisks",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 66,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "regionTag": "core_v1_generated_ServerService_Listservers_sync",
+      "title": "core Listservers Sample",
+      "description": "Listservers lists servers. The order is unspecified but deterministic. Newly created\nservers will not necessarily be added to the end of this list.",
+      "file": "Client/Listservers/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "Listservers",
+        "fullName": "core.wcloud.io.v1.Client.Listservers",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.ListServersRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "resultType": "ServerIterator",
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "Listservers",
+          "fullName": "core.wcloud.io.v1.ServerService.Listservers",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 66,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "regionTag": "core_v1_generated_ServerService_MergeServers_sync",
+      "title": "core MergeServers Sample",
+      "description": "MergeServers merges two servers by adding all disks from the server named\n`other_server_name` to server `name`, and deletes\n`other_server_name`. Returns the updated server.\nThe book ids of the moved disks may not be the same as the original disks.\n\nReturns NOT_FOUND if either server does not exist.\nThis call is a no-op if the specified servers are the same.",
+      "file": "Client/MergeServers/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "MergeServers",
+        "fullName": "core.wcloud.io.v1.Client.MergeServers",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.MergeserversRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "resultType": "*serverpb.Server",
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "MergeServers",
+          "fullName": "core.wcloud.io.v1.ServerService.MergeServers",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "regionTag": "core_v1_generated_ServerService_MoveDisk_sync",
+      "title": "core MoveDisk Sample",
+      "description": "MoveDisk moves a book to another server, and returns the new book. The book\nid of the new book may not be the same as the original book.",
+      "file": "Client/MoveDisk/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "MoveDisk",
+        "fullName": "core.wcloud.io.v1.Client.MoveDisk",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.MoveDiskRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "resultType": "*serverpb.Disk",
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "MoveDisk",
+          "fullName": "core.wcloud.io.v1.ServerService.MoveDisk",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "regionTag": "core_v1_generated_ServerService_UpdateDisk_sync",
+      "title": "core UpdateDisk Sample",
+      "description": "UpdateDisk updates a book. Returns INVALID_ARGUMENT if the name of the book\nis non-empty and does not equal the existing name.",
+      "file": "Client/UpdateDisk/main.go",
+      "language": "GO",
+      "clientMethod": {
+        "shortName": "UpdateDisk",
+        "fullName": "core.wcloud.io.v1.Client.UpdateDisk",
+        "parameters": [
+          {
+            "type": "context.Context",
+            "name": "ctx"
+          },
+          {
+            "type": "serverpb.UpdateDiskRequest",
+            "name": "req"
+          },
+          {
+            "type": "...gax.CallOption",
+            "name": "opts"
+          }
+        ],
+        "resultType": "*serverpb.Disk",
+        "client": {
+          "shortName": "Client",
+          "fullName": "core.wcloud.io.v1.Client"
+        },
+        "method": {
+          "shortName": "UpdateDisk",
+          "fullName": "core.wcloud.io.v1.ServerService.UpdateDisk",
+          "service": {
+            "shortName": "ServerService",
+            "fullName": "core.wcloud.io.v1.ServerService"
+          }
+        }
+      },
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 18,
+          "end": 53,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

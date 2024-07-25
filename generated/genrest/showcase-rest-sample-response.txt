@@ -1,0 +1,154 @@
+Generated via "google.golang.org/protobuf/compiler/protogen" via ProtoModel!
+Files:
+server.proto
+
+Proto Model:
+ServerService (.core.wcloud.io.v1.ServerService):
+  .core.wcloud.io.v1.ServerService.CreateServer[0] : POST: "/v1/servers"
+  .core.wcloud.io.v1.ServerService.GetServer[0] : GET: "/v1/{name=servers/*}"
+  .core.wcloud.io.v1.ServerService.Listservers[0] : GET: "/v1/servers"
+  .core.wcloud.io.v1.ServerService.DeleteServer[0] : DELETE: "/v1/{name=servers/*}"
+  .core.wcloud.io.v1.ServerService.MergeServers[0] : POST: "/v1/{name=servers/*}:merge"
+  .core.wcloud.io.v1.ServerService.CreateDisk[0] : POST: "/v1/{parent=servers/*}/disks"
+  .core.wcloud.io.v1.ServerService.GetDisk[0] : GET: "/v1/{name=servers/*/disks/*}"
+  .core.wcloud.io.v1.ServerService.ListDisks[0] : GET: "/v1/{parent=servers/*}/disks"
+  .core.wcloud.io.v1.ServerService.DeleteDisk[0] : DELETE: "/v1/{name=servers/*/disks/*}"
+  .core.wcloud.io.v1.ServerService.UpdateDisk[0] : PATCH: "/v1/{book.name=servers/*/disks/*}"
+  .core.wcloud.io.v1.ServerService.MoveDisk[0] : POST: "/v1/{name=servers/*/disks/*}:move"
+
+Locations (.google.cloud.location.Locations):
+  .google.cloud.location.Locations.ListLocations[0] : GET: "/v1beta1/{name=projects/*}/locations"
+  .google.cloud.location.Locations.GetLocation[0] : GET: "/v1beta1/{name=projects/*/locations/*}"
+
+IAMPolicy (.google.iam.v1.IAMPolicy):
+  .google.iam.v1.IAMPolicy.SetIamPolicy[0] : POST: "/v1beta1/{resource=users/*}:setIamPolicy"
+  .google.iam.v1.IAMPolicy.SetIamPolicy[1] : POST: "/v1beta1/{resource=rooms/*}:setIamPolicy"
+  .google.iam.v1.IAMPolicy.SetIamPolicy[2] : POST: "/v1beta1/{resource=rooms/*/blurbs/*}:setIamPolicy"
+  .google.iam.v1.IAMPolicy.SetIamPolicy[3] : POST: "/v1beta1/{resource=sequences/*}:setIamPolicy"
+  .google.iam.v1.IAMPolicy.GetIamPolicy[0] : GET: "/v1beta1/{resource=users/*}:getIamPolicy"
+  .google.iam.v1.IAMPolicy.GetIamPolicy[1] : GET: "/v1beta1/{resource=rooms/*}:getIamPolicy"
+  .google.iam.v1.IAMPolicy.GetIamPolicy[2] : GET: "/v1beta1/{resource=rooms/*/blurbs/*}:getIamPolicy"
+  .google.iam.v1.IAMPolicy.GetIamPolicy[3] : GET: "/v1beta1/{resource=sequences/*}:getIamPolicy"
+  .google.iam.v1.IAMPolicy.TestIamPermissions[0] : POST: "/v1beta1/{resource=users/*}:testIamPermissions"
+  .google.iam.v1.IAMPolicy.TestIamPermissions[1] : POST: "/v1beta1/{resource=rooms/*}:testIamPermissions"
+  .google.iam.v1.IAMPolicy.TestIamPermissions[2] : POST: "/v1beta1/{resource=rooms/*/blurbs/*}:testIamPermissions"
+  .google.iam.v1.IAMPolicy.TestIamPermissions[3] : POST: "/v1beta1/{resource=sequences/*}:testIamPermissions"
+
+Operations (.google.longrunning.Operations):
+  .google.longrunning.Operations.ListOperations[0] : GET: "/v1beta1/operations"
+  .google.longrunning.Operations.GetOperation[0] : GET: "/v1beta1/{name=operations/**}"
+  .google.longrunning.Operations.DeleteOperation[0] : DELETE: "/v1beta1/{name=operations/**}"
+  .google.longrunning.Operations.CancelOperation[0] : POST: "/v1beta1/{name=operations/**}:cancel"
+
+
+
+GoModel
+----------------------------------------
+Shim "ServerService" (.core.wcloud.io.v1.ServerService)
+  Imports:
+    emptypbpb: "google.golang.org/protobuf/types/known/emptypb" "google.golang.org/protobuf/types/known/emptypb"
+    serverpb: "core.wcloud.io/generated/grpcgen" "core.wcloud.io/generated/grpcgen"
+  Handlers (11):
+         GET                                        /v1/servers func Listservers(request serverpb.ListServersRequest) (response serverpb.ListServersResponse) {}
+["/" "v1" "/" "servers"]
+
+         GET                               /v1/{name=servers/*} func GetServer(request serverpb.GetServerRequest) (response serverpb.Server) {}
+["/" "v1" "/" {name = ["servers" "/" *]}]
+
+         GET                       /v1/{name=servers/*/disks/*} func GetDisk(request serverpb.GetDiskRequest) (response serverpb.Disk) {}
+["/" "v1" "/" {name = ["servers" "/" * "/" "disks" "/" *]}]
+
+         GET                       /v1/{parent=servers/*}/disks func ListDisks(request serverpb.ListDisksRequest) (response serverpb.ListDisksResponse) {}
+["/" "v1" "/" {parent = ["servers" "/" *]} "/" "disks"]
+
+        POST                                        /v1/servers func CreateServer(request serverpb.CreateServerRequest) (response serverpb.Server) {}
+["/" "v1" "/" "servers"]
+
+        POST                         /v1/{name=servers/*}:merge func MergeServers(request serverpb.MergeserversRequest) (response serverpb.Server) {}
+["/" "v1" "/" {name = ["servers" "/" *]} ":" "merge"]
+
+        POST                       /v1/{parent=servers/*}/disks func CreateDisk(request serverpb.CreateDiskRequest) (response serverpb.Disk) {}
+["/" "v1" "/" {parent = ["servers" "/" *]} "/" "disks"]
+
+        POST                  /v1/{name=servers/*/disks/*}:move func MoveDisk(request serverpb.MoveDiskRequest) (response serverpb.Disk) {}
+["/" "v1" "/" {name = ["servers" "/" * "/" "disks" "/" *]} ":" "move"]
+
+       PATCH                  /v1/{book.name=servers/*/disks/*} func UpdateDisk(request serverpb.UpdateDiskRequest) (response serverpb.Disk) {}
+["/" "v1" "/" {book.name = ["servers" "/" * "/" "disks" "/" *]}]
+
+      DELETE                               /v1/{name=servers/*} func DeleteServer(request serverpb.DeleteServerRequest) (response emptypbpb.Empty) {}
+["/" "v1" "/" {name = ["servers" "/" *]}]
+
+      DELETE                       /v1/{name=servers/*/disks/*} func DeleteDisk(request serverpb.DeleteDiskRequest) (response emptypbpb.Empty) {}
+["/" "v1" "/" {name = ["servers" "/" * "/" "disks" "/" *]}]
+
+----------------------------------------
+Shim "Locations" (.google.cloud.location.Locations)
+  Imports:
+    locationpb: "google.golang.org/genproto/googleapis/cloud/location" "google.golang.org/genproto/googleapis/cloud/location"
+  Handlers (2):
+         GET               /v1beta1/{name=projects/*}/locations func ListLocations(request locationpb.ListLocationsRequest) (response locationpb.ListLocationsResponse) {}
+["/" "v1beta1" "/" {name = ["projects" "/" *]} "/" "locations"]
+
+         GET             /v1beta1/{name=projects/*/locations/*} func GetLocation(request locationpb.GetLocationRequest) (response locationpb.Location) {}
+["/" "v1beta1" "/" {name = ["projects" "/" * "/" "locations" "/" *]}]
+
+----------------------------------------
+Shim "IAMPolicy" (.google.iam.v1.IAMPolicy)
+  Imports:
+    iampbpb: "cloud.google.com/go/iam/apiv1/iampb" "cloud.google.com/go/iam/apiv1/iampb"
+  Handlers (12):
+         GET           /v1beta1/{resource=rooms/*}:getIamPolicy func GetIamPolicy(request iampbpb.GetIamPolicyRequest) (response iampbpb.Policy) {}
+["/" "v1beta1" "/" {resource = ["rooms" "/" *]} ":" "getIamPolicy"]
+
+         GET           /v1beta1/{resource=users/*}:getIamPolicy func GetIamPolicy(request iampbpb.GetIamPolicyRequest) (response iampbpb.Policy) {}
+["/" "v1beta1" "/" {resource = ["users" "/" *]} ":" "getIamPolicy"]
+
+         GET       /v1beta1/{resource=sequences/*}:getIamPolicy func GetIamPolicy(request iampbpb.GetIamPolicyRequest) (response iampbpb.Policy) {}
+["/" "v1beta1" "/" {resource = ["sequences" "/" *]} ":" "getIamPolicy"]
+
+         GET  /v1beta1/{resource=rooms/*/blurbs/*}:getIamPolicy func GetIamPolicy(request iampbpb.GetIamPolicyRequest) (response iampbpb.Policy) {}
+["/" "v1beta1" "/" {resource = ["rooms" "/" * "/" "blurbs" "/" *]} ":" "getIamPolicy"]
+
+        POST           /v1beta1/{resource=rooms/*}:setIamPolicy func SetIamPolicy(request iampbpb.SetIamPolicyRequest) (response iampbpb.Policy) {}
+["/" "v1beta1" "/" {resource = ["rooms" "/" *]} ":" "setIamPolicy"]
+
+        POST           /v1beta1/{resource=users/*}:setIamPolicy func SetIamPolicy(request iampbpb.SetIamPolicyRequest) (response iampbpb.Policy) {}
+["/" "v1beta1" "/" {resource = ["users" "/" *]} ":" "setIamPolicy"]
+
+        POST       /v1beta1/{resource=sequences/*}:setIamPolicy func SetIamPolicy(request iampbpb.SetIamPolicyRequest) (response iampbpb.Policy) {}
+["/" "v1beta1" "/" {resource = ["sequences" "/" *]} ":" "setIamPolicy"]
+
+        POST     /v1beta1/{resource=rooms/*}:testIamPermissions func TestIamPermissions(request iampbpb.TestIamPermissionsRequest) (response iampbpb.TestIamPermissionsResponse) {}
+["/" "v1beta1" "/" {resource = ["rooms" "/" *]} ":" "testIamPermissions"]
+
+        POST     /v1beta1/{resource=users/*}:testIamPermissions func TestIamPermissions(request iampbpb.TestIamPermissionsRequest) (response iampbpb.TestIamPermissionsResponse) {}
+["/" "v1beta1" "/" {resource = ["users" "/" *]} ":" "testIamPermissions"]
+
+        POST  /v1beta1/{resource=rooms/*/blurbs/*}:setIamPolicy func SetIamPolicy(request iampbpb.SetIamPolicyRequest) (response iampbpb.Policy) {}
+["/" "v1beta1" "/" {resource = ["rooms" "/" * "/" "blurbs" "/" *]} ":" "setIamPolicy"]
+
+        POST /v1beta1/{resource=rooms/*/blurbs/*}:testIamPermissions func TestIamPermissions(request iampbpb.TestIamPermissionsRequest) (response iampbpb.TestIamPermissionsResponse) {}
+["/" "v1beta1" "/" {resource = ["rooms" "/" * "/" "blurbs" "/" *]} ":" "testIamPermissions"]
+
+        POST /v1beta1/{resource=sequences/*}:testIamPermissions func TestIamPermissions(request iampbpb.TestIamPermissionsRequest) (response iampbpb.TestIamPermissionsResponse) {}
+["/" "v1beta1" "/" {resource = ["sequences" "/" *]} ":" "testIamPermissions"]
+
+----------------------------------------
+Shim "Operations" (.google.longrunning.Operations)
+  Imports:
+    emptypbpb: "google.golang.org/protobuf/types/known/emptypb" "google.golang.org/protobuf/types/known/emptypb"
+    longrunningpbpb: "cloud.google.com/go/longrunning/autogen/longrunningpb" "cloud.google.com/go/longrunning/autogen/longrunningpb"
+  Handlers (4):
+         GET                                /v1beta1/operations func ListOperations(request longrunningpbpb.ListOperationsRequest) (response longrunningpbpb.ListOperationsResponse) {}
+["/" "v1beta1" "/" "operations"]
+
+         GET                      /v1beta1/{name=operations/**} func GetOperation(request longrunningpbpb.GetOperationRequest) (response longrunningpbpb.Operation) {}
+["/" "v1beta1" "/" {name = ["operations" "/" **]}]
+
+        POST               /v1beta1/{name=operations/**}:cancel func CancelOperation(request longrunningpbpb.CancelOperationRequest) (response emptypbpb.Empty) {}
+["/" "v1beta1" "/" {name = ["operations" "/" **]} ":" "cancel"]
+
+      DELETE                      /v1beta1/{name=operations/**} func DeleteOperation(request longrunningpbpb.DeleteOperationRequest) (response emptypbpb.Empty) {}
+["/" "v1beta1" "/" {name = ["operations" "/" **]}]
+

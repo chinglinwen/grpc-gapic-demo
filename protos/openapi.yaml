@@ -3,16 +3,16 @@
 
 openapi: 3.0.3
 info:
-    title: LibraryService API
+    title: ServerService API
     description: |-
-        This API represents a simple digital library. It lets you manage Server
-         resources and Disk resources in the library. It defines the following
+        This API represents a simple digital server. It lets you manage Server
+         resources and Disk resources in the server. It defines the following
          resource model:
 
-         - The API has a collection of [Server][google.example.library.v1.Server]
+         - The API has a collection of [Server][core.wcloud.io.server.v1.Server]
            resources, named `servers/*`
 
-         - Each Server has a collection of [Disk][google.example.library.v1.Disk]
+         - Each Server has a collection of [Disk][core.wcloud.io.server.v1.Disk]
            resources, named `servers/*/disks/*`
     version: 0.0.1
 servers:
@@ -21,11 +21,11 @@ paths:
     /v1/servers:
         get:
             tags:
-                - LibraryService
+                - ServerService
             description: |-
                 Lists servers. The order is unspecified but deterministic. Newly created
                  servers will not necessarily be added to the end of this list.
-            operationId: LibraryService_Listservers
+            operationId: ServerService_Listservers
             parameters:
                 - name: pageSize
                   in: query
@@ -40,7 +40,7 @@ paths:
                   description: |-
                     A token identifying a page of results the server should return.
                      Typically, this is the value of
-                     [ListserversResponse.next_page_token][google.example.library.v1.ListserversResponse.next_page_token]
+                     [ListserversResponse.next_page_token][core.wcloud.io.server.v1.ListserversResponse.next_page_token]
                      returned from the previous call to `Listservers` method.
                   schema:
                     type: string
@@ -59,9 +59,9 @@ paths:
                                 $ref: '#/components/schemas/Status'
         post:
             tags:
-                - LibraryService
+                - ServerService
             description: Creates a server, and returns the new Server.
-            operationId: LibraryService_CreateServer
+            operationId: ServerService_CreateServer
             requestBody:
                 content:
                     application/json:
@@ -84,9 +84,9 @@ paths:
     /v1/servers/{server}:
         get:
             tags:
-                - LibraryService
+                - ServerService
             description: Gets a server. Returns NOT_FOUND if the server does not exist.
-            operationId: LibraryService_GetServer
+            operationId: ServerService_GetServer
             parameters:
                 - name: server
                   in: path
@@ -109,9 +109,9 @@ paths:
                                 $ref: '#/components/schemas/Status'
         delete:
             tags:
-                - LibraryService
+                - ServerService
             description: Deletes a server. Returns NOT_FOUND if the server does not exist.
-            operationId: LibraryService_DeleteServer
+            operationId: ServerService_DeleteServer
             parameters:
                 - name: server
                   in: path
@@ -132,12 +132,12 @@ paths:
     /v1/servers/{server}/disks:
         get:
             tags:
-                - LibraryService
+                - ServerService
             description: |-
                 Lists disks in a server. The order is unspecified but deterministic. Newly
                  created disks will not necessarily be added to the end of this list.
                  Returns NOT_FOUND if the server does not exist.
-            operationId: LibraryService_ListDisks
+            operationId: ServerService_ListDisks
             parameters:
                 - name: server
                   in: path
@@ -158,7 +158,7 @@ paths:
                   description: |-
                     A token identifying a page of results the server should return.
                      Typically, this is the value of
-                     [ListDisksResponse.next_page_token][google.example.library.v1.ListDisksResponse.next_page_token].
+                     [ListDisksResponse.next_page_token][core.wcloud.io.server.v1.ListDisksResponse.next_page_token].
                      returned from the previous call to `ListDisks` method.
                   schema:
                     type: string
@@ -177,9 +177,9 @@ paths:
                                 $ref: '#/components/schemas/Status'
         post:
             tags:
-                - LibraryService
+                - ServerService
             description: Creates a book, and returns the new Disk.
-            operationId: LibraryService_CreateDisk
+            operationId: ServerService_CreateDisk
             parameters:
                 - name: server
                   in: path
@@ -209,9 +209,9 @@ paths:
     /v1/servers/{server}/disks/{disk}:
         get:
             tags:
-                - LibraryService
+                - ServerService
             description: Gets a book. Returns NOT_FOUND if the book does not exist.
-            operationId: LibraryService_GetDisk
+            operationId: ServerService_GetDisk
             parameters:
                 - name: server
                   in: path
@@ -240,9 +240,9 @@ paths:
                                 $ref: '#/components/schemas/Status'
         delete:
             tags:
-                - LibraryService
+                - ServerService
             description: Deletes a book. Returns NOT_FOUND if the book does not exist.
-            operationId: LibraryService_DeleteDisk
+            operationId: ServerService_DeleteDisk
             parameters:
                 - name: server
                   in: path
@@ -268,11 +268,11 @@ paths:
                                 $ref: '#/components/schemas/Status'
         patch:
             tags:
-                - LibraryService
+                - ServerService
             description: |-
                 Updates a book. Returns INVALID_ARGUMENT if the name of the book
                  is non-empty and does not equal the existing name.
-            operationId: LibraryService_UpdateDisk
+            operationId: ServerService_UpdateDisk
             parameters:
                 - name: server
                   in: path
@@ -314,11 +314,11 @@ paths:
     /v1/servers/{server}/disks/{disk}:move:
         post:
             tags:
-                - LibraryService
+                - ServerService
             description: |-
                 Moves a book to another server, and returns the new book. The book
                  id of the new book may not be the same as the original book.
-            operationId: LibraryService_MoveDisk
+            operationId: ServerService_MoveDisk
             parameters:
                 - name: server
                   in: path
@@ -354,7 +354,7 @@ paths:
     /v1/servers/{server}:merge:
         post:
             tags:
-                - LibraryService
+                - ServerService
             description: |-
                 Merges two servers by adding all disks from the server named
                  `other_server_name` to server `name`, and deletes
@@ -363,7 +363,7 @@ paths:
 
                  Returns NOT_FOUND if either server does not exist.
                  This call is a no-op if the specified servers are the same.
-            operationId: LibraryService_MergeServers
+            operationId: ServerService_MergeServers
             parameters:
                 - name: server
                   in: path
@@ -410,7 +410,7 @@ components:
                 read:
                     type: boolean
                     description: Value indicating whether the book has been read.
-            description: A single book in the library.
+            description: A single book in the server.
         GoogleProtobufAny:
             type: object
             properties:
@@ -432,10 +432,10 @@ components:
                     description: |-
                         A token to retrieve next page of results.
                          Pass this value in the
-                         [ListDisksRequest.page_token][google.example.library.v1.ListDisksRequest.page_token]
+                         [ListDisksRequest.page_token][core.wcloud.io.server.v1.ListDisksRequest.page_token]
                          field in the subsequent call to `ListDisks` method to retrieve the next
                          page of results.
-            description: Response message for LibraryService.ListDisks.
+            description: Response message for ServerService.ListDisks.
         ListServersResponse:
             type: object
             properties:
@@ -449,10 +449,10 @@ components:
                     description: |-
                         A token to retrieve next page of results.
                          Pass this value in the
-                         [ListserversRequest.page_token][google.example.library.v1.ListserversRequest.page_token]
+                         [ListserversRequest.page_token][core.wcloud.io.server.v1.ListserversRequest.page_token]
                          field in the subsequent call to `Listservers` method to retrieve the next
                          page of results.
-            description: Response message for LibraryService.Listservers.
+            description: Response message for ServerService.Listservers.
         MergeserversRequest:
             required:
                 - name
@@ -513,4 +513,4 @@ components:
                     description: A list of messages that carry the error details.  There is a common set of message types for APIs to use.
             description: 'The `Status` type defines a logical error model that is suitable for different programming environments, including REST APIs and RPC APIs. It is used by [gRPC](https://github.com/grpc). Each `Status` message contains three pieces of data: error code, error message, and error details. You can find out more about this error model and how to work with it in the [API Design Guide](https://cloud.google.com/apis/design/errors).'
 tags:
-    - name: LibraryService
+    - name: ServerService
