@@ -18,11 +18,11 @@
 package genrest
 
 import (
+	gmux "github.com/gorilla/mux"
+	longrunningpbpb "cloud.google.com/go/longrunning/autogen/longrunningpb"
 	"context"
 	"net/http"
 	"github.com/googleapis/gapic-showcase/util/genrest/resttools"
-	gmux "github.com/gorilla/mux"
-	longrunningpbpb "cloud.google.com/go/longrunning/autogen/longrunningpb"
 )
 
 // HandleListOperations translates REST requests/responses on the wire to internal proto messages for ListOperations

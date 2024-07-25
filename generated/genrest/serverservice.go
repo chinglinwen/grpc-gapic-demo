@@ -18,13 +18,13 @@
 package genrest
 
 import (
+	"context"
+	"net/http"
+	"github.com/googleapis/gapic-showcase/util/genrest/resttools"
 	gmux "github.com/gorilla/mux"
 	serverpb "core.wcloud.io/generated/grpcgen"
 	"bytes"
 	"io"
-	"context"
-	"net/http"
-	"github.com/googleapis/gapic-showcase/util/genrest/resttools"
 )
 
 // HandleCreateServer translates REST requests/responses on the wire to internal proto messages for CreateServer

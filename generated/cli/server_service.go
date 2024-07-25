@@ -40,22 +40,22 @@ func init() {
 	rootCmd.AddCommand(ServerServiceCmd)
 
 	ServerConfig = viper.New()
-	ServerConfig.SetEnvPrefix("APIDEMO_SERVER")
+	ServerConfig.SetEnvPrefix("WCLOUD_SERVER")
 	ServerConfig.AutomaticEnv()
 
-	ServerServiceCmd.PersistentFlags().Bool("insecure", false, "Make insecure client connection. Or use APIDEMO_SERVER_INSECURE. Must be used with \"address\" option")
+	ServerServiceCmd.PersistentFlags().Bool("insecure", false, "Make insecure client connection. Or use WCLOUD_SERVER_INSECURE. Must be used with \"address\" option")
 	ServerConfig.BindPFlag("insecure", ServerServiceCmd.PersistentFlags().Lookup("insecure"))
 	ServerConfig.BindEnv("insecure")
 
-	ServerServiceCmd.PersistentFlags().String("address", "", "Set API address used by client. Or use APIDEMO_SERVER_ADDRESS.")
+	ServerServiceCmd.PersistentFlags().String("address", "", "Set API address used by client. Or use WCLOUD_SERVER_ADDRESS.")
 	ServerConfig.BindPFlag("address", ServerServiceCmd.PersistentFlags().Lookup("address"))
 	ServerConfig.BindEnv("address")
 
-	ServerServiceCmd.PersistentFlags().String("token", "", "Set Bearer token used by the client. Or use APIDEMO_SERVER_TOKEN.")
+	ServerServiceCmd.PersistentFlags().String("token", "", "Set Bearer token used by the client. Or use WCLOUD_SERVER_TOKEN.")
 	ServerConfig.BindPFlag("token", ServerServiceCmd.PersistentFlags().Lookup("token"))
 	ServerConfig.BindEnv("token")
 
-	ServerServiceCmd.PersistentFlags().String("api_key", "", "Set API Key used by the client. Or use APIDEMO_SERVER_API_KEY.")
+	ServerServiceCmd.PersistentFlags().String("api_key", "", "Set API Key used by the client. Or use WCLOUD_SERVER_API_KEY.")
 	ServerConfig.BindPFlag("api_key", ServerServiceCmd.PersistentFlags().Lookup("api_key"))
 	ServerConfig.BindEnv("api_key")
 }

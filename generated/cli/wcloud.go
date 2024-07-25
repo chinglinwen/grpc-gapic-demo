@@ -23,8 +23,8 @@ func init() {
 }
 
 var rootCmd = &cobra.Command{
-	Use:   "apidemo",
-	Short: "Root command of apidemo",
+	Use:   "wcloud",
+	Short: "Root command of wcloud",
 	
 }
 

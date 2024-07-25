@@ -49,7 +49,7 @@ gencli:
 		--go_cli_out=generated/cli \
 		--go_cli_opt=gapic=core.wcloud.io/generated/gapicgen/server \
 		--go_cli_opt=fmt=false \
-		--go_cli_opt=root=apidemo \
+		--go_cli_opt=root=wcloud \
 		protos/server.proto
 	sed -i 's,gapic.ServerClient,gapic.Client,g'  generated/cli/server_service.go
 	sed -i 's,gapic.NewServerClient,gapic.NewClient,g'  generated/cli/server_service.go
@@ -71,45 +71,6 @@ genrest:
 	sed -i 's,core.wcloud.io/generated/grpcgen,core.wcloud.io/generated/grpcgen,g' generated/genrest/serverservice.go
 	mv -f generated/genrest/iampolicy.go generated/genrest/iampolicy.go.bak || :
 	mv -f generated/genrest/locations.go generated/genrest/locations.go.bak || :
-	
-#		--go_gapic_opt=grpc-service-config=schema/showcase_grpc_service_config.json" \
-#		--go_gapic_opt=api-service-config=schema/showcase_v1beta1.yaml" \
-#		--plugin=protoc-gen-go_gapic \
-
-#		"--go_gapic_opt=grpc-service-config=schema/google/showcase/v1beta1/showcase_grpc_service_config.json",
-#		"--go_gapic_opt=api-service-config=schema/google/showcase/v1beta1/showcase_v1beta1.yaml",
-#		"--go_out=plugins=grpc:" + outDir,
-#		--go_cli_opt=root=apidemo \
-
-#		--go_gapic_out=generated/gapicgen \
-#		--go_gapic_opt=go-gapic-package=core.wcloud.io/generated/gapicgen/server;server \
-#		--go_gapic_opt=metadata \
-#		--go_gapic_opt=transport=grpc+rest \
-
-.PHONY: genrest2
-genrest2:
-	mkdir -p generated/gapicgen
-	protoc -I /home/wen/soft/googleapis \
-		--experimental_allow_proto3_optional \
-		--proto_path=protos \
-		--go_cli_out=generated/cli \
-		--go_cli_opt=gapic=core.wcloud.io/generated/gapicgen/server \
-		--go_cli_opt=fmt=false \
-		--go_gapic_out=generated/gapicgen \
-		--go_gapic_opt='go-gapic-package=core.wcloud.io/generated/gapicgen/server;server' \
-		--go_gapic_opt=metadata \
-		--go_gapic_opt=transport=grpc+rest \
-		--go_rest_server_out=generated/genrest \
-		--go_gapic_opt=grpc-service-config=schema/showcase_grpc_service_config.json \
-		--go_gapic_opt=api-service-config=schema/showcase_v1beta1.yaml \
-		--go_cli_opt=root=apidemo \
-		protos/server.proto
-
-
-# 		--go_out=plugins=grpc: \
-
-#		--go_gapic_opt=grpc-service-config=schema/google/showcase/v1beta1/showcase_grpc_service_config.json" \
-#		--go_gapic_opt=api-service-config=schema/google/showcase/v1beta1/showcase_v1beta1.yaml" \
 
 .PHONY: genopenapiyaml
 genopenapiyaml:

@@ -15,13 +15,13 @@
 	// completionCmd represents the completion command
 	var completionCmd = &cobra.Command{
 		Use:   "completion",
-		Short: "Emits bash a completion for apidemo",
+		Short: "Emits bash a completion for wcloud",
 		Long: `Enable bash completion like so:
 		Linux:
-			source <(apidemo completion)
+			source <(wcloud completion)
 		Mac:
 			brew install bash-completion
-			apidemo completion > $(brew --prefix)/etc/bash_completion.d/apidemo`,
+			wcloud completion > $(brew --prefix)/etc/bash_completion.d/wcloud`,
 		Run: func(cmd *cobra.Command, args []string) {
 			rootCmd.GenBashCompletion(os.Stdout)
 		},
