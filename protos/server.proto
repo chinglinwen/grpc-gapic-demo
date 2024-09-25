@@ -61,7 +61,7 @@ service ServerService {
 
   // Lists servers. The order is unspecified but deterministic. Newly created
   // servers will not necessarily be added to the end of this list.
-  rpc Listservers(ListServersRequest) returns (ListServersResponse) {
+  rpc ListServers(ListServersRequest) returns (ListServersResponse) {
     option (google.api.http) = {
       get: "/v1/servers"
     };
@@ -230,20 +230,20 @@ message ListServersRequest {
 
   // A token identifying a page of results the server should return.
   // Typically, this is the value of
-  // [ListserversResponse.next_page_token][core.wcloud.io.server.v1.ListserversResponse.next_page_token]
-  // returned from the previous call to `Listservers` method.
+  // [ListServersResponse.next_page_token][core.wcloud.io.server.v1.ListServersResponse.next_page_token]
+  // returned from the previous call to `ListServers` method.
   string page_token = 2;
 }
 
-// Response message for ServerService.Listservers.
+// Response message for ServerService.ListServers.
 message ListServersResponse {
   // The list of servers.
   repeated Server servers = 1;
 
   // A token to retrieve next page of results.
   // Pass this value in the
-  // [ListserversRequest.page_token][core.wcloud.io.server.v1.ListserversRequest.page_token]
-  // field in the subsequent call to `Listservers` method to retrieve the next
+  // [ListServersRequest.page_token][core.wcloud.io.server.v1.ListServersRequest.page_token]
+  // field in the subsequent call to `ListServers` method to retrieve the next
   // page of results.
   string next_page_token = 2;
 }

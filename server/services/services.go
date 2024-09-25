@@ -13,7 +13,7 @@ type ServerServices struct {
 	pb.ServerServiceServer
 }
 
-func (s *ServerServices) Listservers(context.Context, *pb.ListServersRequest) (*pb.ListServersResponse, error) {
+func (s *ServerServices) ListServers(context.Context, *pb.ListServersRequest) (*pb.ListServersResponse, error) {
 	return &pb.ListServersResponse{
 		Servers: []*pb.Server{
 			{

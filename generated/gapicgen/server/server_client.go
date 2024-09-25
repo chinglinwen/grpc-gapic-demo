@@ -45,7 +45,7 @@ var newClientHook clientHook
 type CallOptions struct {
 	CreateServer []gax.CallOption
 	GetServer []gax.CallOption
-	Listservers []gax.CallOption
+	ListServers []gax.CallOption
 	DeleteServer []gax.CallOption
 	MergeServers []gax.CallOption
 	CreateDisk []gax.CallOption
@@ -77,7 +77,7 @@ func defaultCallOptions() *CallOptions {
 		},
 		GetServer: []gax.CallOption{
 		},
-		Listservers: []gax.CallOption{
+		ListServers: []gax.CallOption{
 		},
 		DeleteServer: []gax.CallOption{
 		},
@@ -104,7 +104,7 @@ func defaultRESTCallOptions() *CallOptions {
 		},
 		GetServer: []gax.CallOption{
 		},
-		Listservers: []gax.CallOption{
+		ListServers: []gax.CallOption{
 		},
 		DeleteServer: []gax.CallOption{
 		},
@@ -132,7 +132,7 @@ type internalClient interface {
 	Connection() *grpc.ClientConn
 	CreateServer(context.Context, *serverpb.CreateServerRequest, ...gax.CallOption) (*serverpb.Server, error)
 	GetServer(context.Context, *serverpb.GetServerRequest, ...gax.CallOption) (*serverpb.Server, error)
-	Listservers(context.Context, *serverpb.ListServersRequest, ...gax.CallOption) *ServerIterator
+	ListServers(context.Context, *serverpb.ListServersRequest, ...gax.CallOption) *ServerIterator
 	DeleteServer(context.Context, *serverpb.DeleteServerRequest, ...gax.CallOption) error
 	MergeServers(context.Context, *serverpb.MergeserversRequest, ...gax.CallOption) (*serverpb.Server, error)
 	CreateDisk(context.Context, *serverpb.CreateDiskRequest, ...gax.CallOption) (*serverpb.Disk, error)
@@ -197,10 +197,10 @@ func (c *Client) GetServer(ctx context.Context, req *serverpb.GetServerRequest, 
 	return c.internalClient.GetServer(ctx, req, opts...)
 }
 
-// Listservers lists servers. The order is unspecified but deterministic. Newly created
+// ListServers lists servers. The order is unspecified but deterministic. Newly created
 // servers will not necessarily be added to the end of this list.
-func (c *Client) Listservers(ctx context.Context, req *serverpb.ListServersRequest, opts ...gax.CallOption) *ServerIterator {
-	return c.internalClient.Listservers(ctx, req, opts...)
+func (c *Client) ListServers(ctx context.Context, req *serverpb.ListServersRequest, opts ...gax.CallOption) *ServerIterator {
+	return c.internalClient.ListServers(ctx, req, opts...)
 }
 
 // DeleteServer deletes a server. Returns NOT_FOUND if the server does not exist.
@@ -449,9 +449,9 @@ func (c *gRPCClient) GetServer(ctx context.Context, req *serverpb.GetServerReque
 	return resp, nil
 }
 
-func (c *gRPCClient) Listservers(ctx context.Context, req *serverpb.ListServersRequest, opts ...gax.CallOption) *ServerIterator {
+func (c *gRPCClient) ListServers(ctx context.Context, req *serverpb.ListServersRequest, opts ...gax.CallOption) *ServerIterator {
 	ctx = gax.InsertMetadataIntoOutgoingContext(ctx, c.xGoogHeaders...)
-	opts = append((*c.CallOptions).Listservers[0:len((*c.CallOptions).Listservers):len((*c.CallOptions).Listservers)], opts...)
+	opts = append((*c.CallOptions).ListServers[0:len((*c.CallOptions).ListServers):len((*c.CallOptions).ListServers)], opts...)
 	it := &ServerIterator{}
 	req = proto.Clone(req).(*serverpb.ListServersRequest)
 	it.InternalFetch = func(pageSize int, pageToken string) ([]*serverpb.Server, string, error) {
@@ -466,7 +466,7 @@ func (c *gRPCClient) Listservers(ctx context.Context, req *serverpb.ListServersR
 		}
 		err := gax.Invoke(ctx, func(ctx context.Context, settings gax.CallSettings) error {
 			var err error
-			resp, err = c.client.Listservers(ctx, req, settings.GRPC...)
+			resp, err = c.client.ListServers(ctx, req, settings.GRPC...)
 			return err
 		}, opts...)
 		if err != nil {
@@ -768,9 +768,9 @@ func (c *restClient) GetServer(ctx context.Context, req *serverpb.GetServerReque
 	}
 	return resp, nil
 }
-// Listservers lists servers. The order is unspecified but deterministic. Newly created
+// ListServers lists servers. The order is unspecified but deterministic. Newly created
 // servers will not necessarily be added to the end of this list.
-func (c *restClient) Listservers(ctx context.Context, req *serverpb.ListServersRequest, opts ...gax.CallOption) *ServerIterator {
+func (c *restClient) ListServers(ctx context.Context, req *serverpb.ListServersRequest, opts ...gax.CallOption) *ServerIterator {
 	it := &ServerIterator{}
 	req = proto.Clone(req).(*serverpb.ListServersRequest)
 	unm := protojson.UnmarshalOptions{AllowPartial: true, DiscardUnknown: true}

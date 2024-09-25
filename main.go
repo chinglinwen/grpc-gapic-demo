@@ -17,18 +17,18 @@ import (
 	"core.wcloud.io/server/services"
 )
 
-var (
-	grpcServerEndpoint = flag.String("grpc-server-endpoint", "localhost:9090", "gRPC server endpoint")
-)
+func main() {
+	grpcAddr := flag.String("grpc", "0.0.0.0:10001", "grpc addr")
+	httpAddr := flag.String("http", "0.0.0.0:10000", "http addr")
+	flag.Parse()
 
-func run() error {
+	// Adds gRPC internal logs. This is quite verbose, so adjust as desired!
 	log := grpclog.NewLoggerV2(os.Stdout, ioutil.Discard, ioutil.Discard)
 	grpclog.SetLoggerV2(log)
 
-	addr := "0.0.0.0:10000"
-	lis, err := net.Listen("tcp", addr)
+	lis, err := net.Listen("tcp", *grpcAddr)
 	if err != nil {
-		log.Fatalln("Failed to listen:", err)
+		log.Fatal("Failed to listen:", err)
 	}
 
 	grpcServer := grpc.NewServer(grpc.Creds(insecure.NewCredentials()))
@@ -39,21 +39,15 @@ func run() error {
 	mux := runtime.NewServeMux()
 	err = pb.RegisterServerServiceHandlerServer(context.Background(), mux, s)
 	if err != nil {
-		return err
+		log.Fatal(err)
 	}
 
-	log.Info("Serving gRPC on https://", addr)
+	// Serve gRPC Server
+	log.Info("Serving gRPC on https://", *httpAddr)
 	go func() {
 		log.Fatal(grpcServer.Serve(lis))
 	}()
 
-	return http.ListenAndServe(":11000", mux)
-}
-
-func main() {
-	flag.Parse()
-
-	if err := run(); err != nil {
-		grpclog.Fatal(err)
-	}
+	// Start HTTP server (and proxy calls to gRPC server endpoint)
+	log.Fatal(http.ListenAndServe(*httpAddr, mux))
 }

@@ -332,14 +332,14 @@
       ]
     },
     {
-      "regionTag": "core_v1_generated_ServerService_Listservers_sync",
-      "title": "core Listservers Sample",
-      "description": "Listservers lists servers. The order is unspecified but deterministic. Newly created\nservers will not necessarily be added to the end of this list.",
-      "file": "Client/Listservers/main.go",
+      "regionTag": "core_v1_generated_ServerService_ListServers_sync",
+      "title": "core ListServers Sample",
+      "description": "ListServers lists servers. The order is unspecified but deterministic. Newly created\nservers will not necessarily be added to the end of this list.",
+      "file": "Client/ListServers/main.go",
       "language": "GO",
       "clientMethod": {
-        "shortName": "Listservers",
-        "fullName": "core.wcloud.io.v1.Client.Listservers",
+        "shortName": "ListServers",
+        "fullName": "core.wcloud.io.v1.Client.ListServers",
         "parameters": [
           {
             "type": "context.Context",
@@ -360,8 +360,8 @@
           "fullName": "core.wcloud.io.v1.Client"
         },
         "method": {
-          "shortName": "Listservers",
-          "fullName": "core.wcloud.io.v1.ServerService.Listservers",
+          "shortName": "ListServers",
+          "fullName": "core.wcloud.io.v1.ServerService.ListServers",
           "service": {
             "shortName": "ServerService",
             "fullName": "core.wcloud.io.v1.ServerService"

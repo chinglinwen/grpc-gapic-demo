@@ -6,7 +6,7 @@ Proto Model:
 ServerService (.core.wcloud.io.v1.ServerService):
   .core.wcloud.io.v1.ServerService.CreateServer[0] : POST: "/v1/servers"
   .core.wcloud.io.v1.ServerService.GetServer[0] : GET: "/v1/{name=servers/*}"
-  .core.wcloud.io.v1.ServerService.Listservers[0] : GET: "/v1/servers"
+  .core.wcloud.io.v1.ServerService.ListServers[0] : GET: "/v1/servers"
   .core.wcloud.io.v1.ServerService.DeleteServer[0] : DELETE: "/v1/{name=servers/*}"
   .core.wcloud.io.v1.ServerService.MergeServers[0] : POST: "/v1/{name=servers/*}:merge"
   .core.wcloud.io.v1.ServerService.CreateDisk[0] : POST: "/v1/{parent=servers/*}/disks"
@@ -49,7 +49,7 @@ Shim "ServerService" (.core.wcloud.io.v1.ServerService)
     emptypbpb: "google.golang.org/protobuf/types/known/emptypb" "google.golang.org/protobuf/types/known/emptypb"
     serverpb: "core.wcloud.io/generated/grpcgen" "core.wcloud.io/generated/grpcgen"
   Handlers (11):
-         GET                                        /v1/servers func Listservers(request serverpb.ListServersRequest) (response serverpb.ListServersResponse) {}
+         GET                                        /v1/servers func ListServers(request serverpb.ListServersRequest) (response serverpb.ListServersResponse) {}
 ["/" "v1" "/" "servers"]
 
          GET                               /v1/{name=servers/*} func GetServer(request serverpb.GetServerRequest) (response serverpb.Server) {}

@@ -24,9 +24,9 @@ import (
 	
 )
 
-var ListserversInput serverpb.ListServersRequest
+var ListServersInput serverpb.ListServersRequest
 
-var ListserversFromFile string
+var ListServersFromFile string
 
 
 
@@ -38,28 +38,28 @@ var ListserversFromFile string
 
 
 func init() {
-	ServerServiceCmd.AddCommand(ListserversCmd)
+	ServerServiceCmd.AddCommand(ListServersCmd)
 	
 	
-	ListserversCmd.Flags().Int32Var(&ListserversInput.PageSize, "page_size", 10, "Default is 10. Requested page size. Server may return fewer...")
+	ListServersCmd.Flags().Int32Var(&ListServersInput.PageSize, "page_size", 10, "Default is 10. Requested page size. Server may return fewer...")
 	
-	ListserversCmd.Flags().StringVar(&ListserversInput.PageToken, "page_token", "", "A token identifying a page of results the server...")
+	ListServersCmd.Flags().StringVar(&ListServersInput.PageToken, "page_token", "", "A token identifying a page of results the server...")
 	
 	
 	
-	ListserversCmd.Flags().StringVar(&ListserversFromFile, "from_file", "", "Absolute path to JSON file containing request payload")
+	ListServersCmd.Flags().StringVar(&ListServersFromFile, "from_file", "", "Absolute path to JSON file containing request payload")
 	
 	
 	
 }
 
-var ListserversCmd = &cobra.Command{
+var ListServersCmd = &cobra.Command{
   Use:   "listservers",
   Short: "Lists servers. The order is unspecified but...",
 	Long: "Lists servers. The order is unspecified but deterministic. Newly created  servers will not necessarily be added to the end of this list.",
 	PreRun: func(cmd *cobra.Command, args []string) {
 		
-		if ListserversFromFile == "" {
+		if ListServersFromFile == "" {
 			
 			
 			
@@ -72,14 +72,14 @@ var ListserversCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) (err error) {
 		
 		in := os.Stdin
-		if ListserversFromFile != "" {
-			in, err = os.Open(ListserversFromFile)
+		if ListServersFromFile != "" {
+			in, err = os.Open(ListServersFromFile)
 			if err != nil {
 				return err
 			}
 			defer in.Close()
 			
-			err = jsonpb.Unmarshal(in, &ListserversInput)
+			err = jsonpb.Unmarshal(in, &ListServersInput)
 			if err != nil {
 				return err
 			}
@@ -96,9 +96,9 @@ var ListserversCmd = &cobra.Command{
 		
 		
 		if Verbose {
-			printVerboseInput("Server", "Listservers", &ListserversInput)
+			printVerboseInput("Server", "ListServers", &ListServersInput)
 		}
-		iter := ServerClient.Listservers(ctx, &ListserversInput)
+		iter := ServerClient.ListServers(ctx, &ListServersInput)
 		
 		
 		// populate iterator with a page

@@ -242,7 +242,7 @@ func ExampleClient_ListDisks() {
 	}
 }
 
-func ExampleClient_Listservers() {
+func ExampleClient_ListServers() {
 	ctx := context.Background()
 	// This snippet has been automatically generated and should be regarded as a code template only.
 	// It will require modifications to work:
@@ -259,7 +259,7 @@ func ExampleClient_Listservers() {
 		// TODO: Fill request struct fields.
 		// See https://pkg.go.dev/core.wcloud.io/generated/grpcgen#ListServersRequest.
 	}
-	it := c.Listservers(ctx, req)
+	it := c.ListServers(ctx, req)
 	for {
 		resp, err := it.Next()
 		if err == iterator.Done {

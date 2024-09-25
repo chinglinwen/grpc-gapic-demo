@@ -25,7 +25,7 @@ paths:
             description: |-
                 Lists servers. The order is unspecified but deterministic. Newly created
                  servers will not necessarily be added to the end of this list.
-            operationId: ServerService_Listservers
+            operationId: ServerService_ListServers
             parameters:
                 - name: pageSize
                   in: query
@@ -40,8 +40,8 @@ paths:
                   description: |-
                     A token identifying a page of results the server should return.
                      Typically, this is the value of
-                     [ListserversResponse.next_page_token][core.wcloud.io.server.v1.ListserversResponse.next_page_token]
-                     returned from the previous call to `Listservers` method.
+                     [ListServersResponse.next_page_token][core.wcloud.io.server.v1.ListServersResponse.next_page_token]
+                     returned from the previous call to `ListServers` method.
                   schema:
                     type: string
             responses:
@@ -449,10 +449,10 @@ components:
                     description: |-
                         A token to retrieve next page of results.
                          Pass this value in the
-                         [ListserversRequest.page_token][core.wcloud.io.server.v1.ListserversRequest.page_token]
-                         field in the subsequent call to `Listservers` method to retrieve the next
+                         [ListServersRequest.page_token][core.wcloud.io.server.v1.ListServersRequest.page_token]
+                         field in the subsequent call to `ListServers` method to retrieve the next
                          page of results.
-            description: Response message for ServerService.Listservers.
+            description: Response message for ServerService.ListServers.
         MergeserversRequest:
             required:
                 - name

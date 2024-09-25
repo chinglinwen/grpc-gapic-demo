@@ -29,7 +29,7 @@ type ServerServiceClient interface {
 	GetServer(ctx context.Context, in *GetServerRequest, opts ...grpc.CallOption) (*Server, error)
 	// Lists servers. The order is unspecified but deterministic. Newly created
 	// servers will not necessarily be added to the end of this list.
-	Listservers(ctx context.Context, in *ListServersRequest, opts ...grpc.CallOption) (*ListServersResponse, error)
+	ListServers(ctx context.Context, in *ListServersRequest, opts ...grpc.CallOption) (*ListServersResponse, error)
 	// Deletes a server. Returns NOT_FOUND if the server does not exist.
 	DeleteServer(ctx context.Context, in *DeleteServerRequest, opts ...grpc.CallOption) (*emptypb.Empty, error)
 	// Merges two servers by adding all disks from the server named
@@ -84,9 +84,9 @@ func (c *serverServiceClient) GetServer(ctx context.Context, in *GetServerReques
 	return out, nil
 }
 
-func (c *serverServiceClient) Listservers(ctx context.Context, in *ListServersRequest, opts ...grpc.CallOption) (*ListServersResponse, error) {
+func (c *serverServiceClient) ListServers(ctx context.Context, in *ListServersRequest, opts ...grpc.CallOption) (*ListServersResponse, error) {
 	out := new(ListServersResponse)
-	err := c.cc.Invoke(ctx, "/core.wcloud.io.v1.ServerService/Listservers", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/core.wcloud.io.v1.ServerService/ListServers", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -175,7 +175,7 @@ type ServerServiceServer interface {
 	GetServer(context.Context, *GetServerRequest) (*Server, error)
 	// Lists servers. The order is unspecified but deterministic. Newly created
 	// servers will not necessarily be added to the end of this list.
-	Listservers(context.Context, *ListServersRequest) (*ListServersResponse, error)
+	ListServers(context.Context, *ListServersRequest) (*ListServersResponse, error)
 	// Deletes a server. Returns NOT_FOUND if the server does not exist.
 	DeleteServer(context.Context, *DeleteServerRequest) (*emptypb.Empty, error)
 	// Merges two servers by adding all disks from the server named
@@ -215,8 +215,8 @@ func (UnimplementedServerServiceServer) CreateServer(context.Context, *CreateSer
 func (UnimplementedServerServiceServer) GetServer(context.Context, *GetServerRequest) (*Server, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetServer not implemented")
 }
-func (UnimplementedServerServiceServer) Listservers(context.Context, *ListServersRequest) (*ListServersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Listservers not implemented")
+func (UnimplementedServerServiceServer) ListServers(context.Context, *ListServersRequest) (*ListServersResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ListServers not implemented")
 }
 func (UnimplementedServerServiceServer) DeleteServer(context.Context, *DeleteServerRequest) (*emptypb.Empty, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteServer not implemented")
@@ -291,20 +291,20 @@ func _ServerService_GetServer_Handler(srv interface{}, ctx context.Context, dec 
 	return interceptor(ctx, in, info, handler)
 }
 
-func _ServerService_Listservers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _ServerService_ListServers_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(ListServersRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(ServerServiceServer).Listservers(ctx, in)
+		return srv.(ServerServiceServer).ListServers(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/core.wcloud.io.v1.ServerService/Listservers",
+		FullMethod: "/core.wcloud.io.v1.ServerService/ListServers",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(ServerServiceServer).Listservers(ctx, req.(*ListServersRequest))
+		return srv.(ServerServiceServer).ListServers(ctx, req.(*ListServersRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -469,8 +469,8 @@ var ServerService_ServiceDesc = grpc.ServiceDesc{
 			Handler:    _ServerService_GetServer_Handler,
 		},
 		{
-			MethodName: "Listservers",
-			Handler:    _ServerService_Listservers_Handler,
+			MethodName: "ListServers",
+			Handler:    _ServerService_ListServers_Handler,
 		},
 		{
 			MethodName: "DeleteServer",

@@ -394,8 +394,8 @@ type ListServersRequest struct {
 	PageSize int32 `protobuf:"varint,1,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
 	// A token identifying a page of results the server should return.
 	// Typically, this is the value of
-	// [ListserversResponse.next_page_token][core.wcloud.io.server.v1.ListserversResponse.next_page_token]
-	// returned from the previous call to `Listservers` method.
+	// [ListServersResponse.next_page_token][core.wcloud.io.server.v1.ListServersResponse.next_page_token]
+	// returned from the previous call to `ListServers` method.
 	PageToken string `protobuf:"bytes,2,opt,name=page_token,json=pageToken,proto3" json:"page_token,omitempty"`
 }
 
@@ -445,7 +445,7 @@ func (x *ListServersRequest) GetPageToken() string {
 	return ""
 }
 
-// Response message for ServerService.Listservers.
+// Response message for ServerService.ListServers.
 type ListServersResponse struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -455,8 +455,8 @@ type ListServersResponse struct {
 	Servers []*Server `protobuf:"bytes,1,rep,name=servers,proto3" json:"servers,omitempty"`
 	// A token to retrieve next page of results.
 	// Pass this value in the
-	// [ListserversRequest.page_token][core.wcloud.io.server.v1.ListserversRequest.page_token]
-	// field in the subsequent call to `Listservers` method to retrieve the next
+	// [ListServersRequest.page_token][core.wcloud.io.server.v1.ListServersRequest.page_token]
+	// field in the subsequent call to `ListServers` method to retrieve the next
 	// page of results.
 	NextPageToken string `protobuf:"bytes,2,opt,name=next_page_token,json=nextPageToken,proto3" json:"next_page_token,omitempty"`
 }
@@ -1285,7 +1285,7 @@ var file_server_proto_depIdxs = []int32{
 	17, // 6: core.wcloud.io.v1.UpdateDiskRequest.update_mask:type_name -> google.protobuf.FieldMask
 	4,  // 7: core.wcloud.io.v1.ServerService.CreateServer:input_type -> core.wcloud.io.v1.CreateServerRequest
 	5,  // 8: core.wcloud.io.v1.ServerService.GetServer:input_type -> core.wcloud.io.v1.GetServerRequest
-	6,  // 9: core.wcloud.io.v1.ServerService.Listservers:input_type -> core.wcloud.io.v1.ListServersRequest
+	6,  // 9: core.wcloud.io.v1.ServerService.ListServers:input_type -> core.wcloud.io.v1.ListServersRequest
 	8,  // 10: core.wcloud.io.v1.ServerService.DeleteServer:input_type -> core.wcloud.io.v1.DeleteServerRequest
 	9,  // 11: core.wcloud.io.v1.ServerService.MergeServers:input_type -> core.wcloud.io.v1.MergeserversRequest
 	10, // 12: core.wcloud.io.v1.ServerService.CreateDisk:input_type -> core.wcloud.io.v1.CreateDiskRequest
@@ -1296,7 +1296,7 @@ var file_server_proto_depIdxs = []int32{
 	16, // 17: core.wcloud.io.v1.ServerService.MoveDisk:input_type -> core.wcloud.io.v1.MoveDiskRequest
 	1,  // 18: core.wcloud.io.v1.ServerService.CreateServer:output_type -> core.wcloud.io.v1.Server
 	1,  // 19: core.wcloud.io.v1.ServerService.GetServer:output_type -> core.wcloud.io.v1.Server
-	7,  // 20: core.wcloud.io.v1.ServerService.Listservers:output_type -> core.wcloud.io.v1.ListServersResponse
+	7,  // 20: core.wcloud.io.v1.ServerService.ListServers:output_type -> core.wcloud.io.v1.ListServersResponse
 	18, // 21: core.wcloud.io.v1.ServerService.DeleteServer:output_type -> google.protobuf.Empty
 	1,  // 22: core.wcloud.io.v1.ServerService.MergeServers:output_type -> core.wcloud.io.v1.Server
 	0,  // 23: core.wcloud.io.v1.ServerService.CreateDisk:output_type -> core.wcloud.io.v1.Disk

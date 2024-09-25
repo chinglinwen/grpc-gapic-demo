@@ -176,10 +176,10 @@ func (backend *RESTBackend) HandleGetServer(w http.ResponseWriter, r *http.Reque
 	w.Write(json)
 }
 
-// HandleListservers translates REST requests/responses on the wire to internal proto messages for Listservers
+// HandleListServers translates REST requests/responses on the wire to internal proto messages for ListServers
 //
 //	Generated for HTTP binding pattern: GET "/v1/servers"
-func (backend *RESTBackend) HandleListservers(w http.ResponseWriter, r *http.Request) {
+func (backend *RESTBackend) HandleListServers(w http.ResponseWriter, r *http.Request) {
 	urlPathParams := gmux.Vars(r)
 	numUrlPathParams := len(urlPathParams)
 
@@ -222,7 +222,7 @@ func (backend *RESTBackend) HandleListservers(w http.ResponseWriter, r *http.Req
 	backend.StdLog.Printf("  request: %s", requestJSON)
 
 	ctx := context.WithValue(r.Context(), resttools.BindingURIKey, "/v1/servers")
-	response, err := backend.ServerServiceServer.Listservers(ctx, request)
+	response, err := backend.ServerServiceServer.ListServers(ctx, request)
 	if err != nil {
 		backend.ReportGRPCError(w, err)
 		return

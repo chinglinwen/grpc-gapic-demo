@@ -16,7 +16,7 @@ func TestGRPC(t *testing.T) {
 		log.Fatalf("new client err: %v", err)
 	}
 	cli := pb.NewServerServiceClient(cc)
-	r, err := cli.Listservers(context.Background(), &pb.ListServersRequest{})
+	r, err := cli.ListServers(context.Background(), &pb.ListServersRequest{})
 	if err != nil {
 		log.Fatalf("list err: %v", err)
 	}

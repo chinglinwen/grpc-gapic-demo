@@ -34,7 +34,7 @@ func RegisterHandlers(router *gmux.Router, backend *services.Backend) {
 	rest := (*RESTBackend)(backend)
 	router.HandleFunc("/v1/servers", rest.HandleCreateServer).Methods("POST")
 	router.HandleFunc("/v1/{name:servers/[^:]+}", rest.HandleGetServer).Methods("GET")
-	router.HandleFunc("/v1/servers", rest.HandleListservers).Methods("GET")
+	router.HandleFunc("/v1/servers", rest.HandleListServers).Methods("GET")
 	router.HandleFunc("/v1/{name:servers/[^:]+}", rest.HandleDeleteServer).Methods("DELETE")
 	router.HandleFunc("/v1/{name:servers/[^:]+}:merge", rest.HandleMergeServers).Methods("POST")
 	router.HandleFunc("/v1/{parent:servers/[^:]+}/disks", rest.HandleCreateDisk).Methods("POST")
