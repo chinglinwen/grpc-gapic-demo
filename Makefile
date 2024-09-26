@@ -1,25 +1,23 @@
 
 .PHONY: all
-all: generate
+all: generate build
 
 .PHONY: build
 build:
-	go build -o bin/cli generated/cli/*.go
+	#go build -o bin/cli generated/cli/*.go
+	go build -o demo .
 
 .PHONY: generate
-generate: grpcgen gapicgen gencli genrest genopenapiyaml
+generate: grpcgen gapicgen genrest genopenapiyaml
 
 .PHONY: grpcgen
 grpcgen:
 	mkdir -p generated/grpcgen
-	protoc -I /home/wen/soft/googleapis \
+	protoc -I ~/.local/googleapis \
 	--go_out=generated/grpcgen \
 	--go_opt=paths=source_relative \
     --go-grpc_out=generated/grpcgen \
 	--go-grpc_opt=paths=source_relative \
-	--grpc-gateway_out=generated/grpcgen \
-	--grpc-gateway_opt=paths=source_relative \
-	--grpc-gateway_opt=generate_unbound_methods=true \
     --proto_path=protos \
 	protos/server.proto
 
@@ -27,7 +25,7 @@ grpcgen:
 gapicgen:
 	rm -rf generated/gapicgen
 	mkdir -p generated/gapicgen
-	protoc -I /home/wen/soft/googleapis \
+	protoc -I ~/.local/googleapis \
 		--go_gapic_out=generated/gapicgen \
 		--go_gapic_opt='go-gapic-package=core.wcloud.io/generated/gapicgen/server;server' \
 		--go_gapic_opt=transport=grpc+rest \
@@ -40,26 +38,27 @@ gapicgen:
 	#sed -i 's,core.wcloud.io/generated/grpcgen,core.wcloud.io/generated/grpcgen,g' generated/gapicgen/server/server_client.go
 	#sed -i 's,core.wcloud.io/generated/grpcgen,core.wcloud.io/generated/grpcgen,g' generated/gapicgen/server/auxiliary.go
 
-.PHONY: gencli
-gencli:
-	mkdir -p generated/cli
-	protoc -I /home/wen/soft/googleapis \
-		--experimental_allow_proto3_optional \
-		--proto_path=protos \
-		--go_cli_out=generated/cli \
-		--go_cli_opt=gapic=core.wcloud.io/generated/gapicgen/server \
-		--go_cli_opt=fmt=false \
-		--go_cli_opt=root=wcloud \
-		protos/server.proto
-	sed -i 's,gapic.ServerClient,gapic.Client,g'  generated/cli/server_service.go
-	sed -i 's,gapic.NewServerClient,gapic.NewClient,g'  generated/cli/server_service.go
+# .PHONY: gencli
+# gencli:
+# 	mkdir -p generated/cli
+# 	protoc -I ~/.local/googleapis \
+# 		--experimental_allow_proto3_optional \
+# 		--proto_path=protos \
+# 		--go_cli_out=generated/cli \
+# 		--go_cli_opt=gapic=core.wcloud.io/generated/gapicgen/server \
+# 		--go_cli_opt=fmt=false \
+# 		--go_cli_opt=root=wcloud \
+# 		protos/server.proto
+# 	sed -i 's,gapic.ServerClient,gapic.Client,g'  generated/cli/server_service.go
+# 	sed -i 's,gapic.NewServerClient,gapic.NewClient,g'  generated/cli/server_service.go
+# 	grep -r google.golang.org/protobuf/jsonpb | grep -v Makefile | grep generated | awk '{ print $1 }' FS=: | \
+# 		xargs sed -i 's,"google.golang.org/protobuf/jsonpb",jsonpb "google.golang.org/protobuf/encoding/protojson",g' || :
 
-# ln -sf $HOME/github/googleapis/gapic-showcase/schema .
 .PHONY: genrest
 genrest:
-	# cp -r ~/github/googleapis/gapic-showcase/schema .
+	test -f schema || ln -sf ~/.local/gapic-showcase/schema schema
 	mkdir -p generated/genrest
-	protoc -I /home/wen/soft/googleapis \
+	protoc -I ~/.local/googleapis \
 		--experimental_allow_proto3_optional \
 		--proto_path=protos \
 		--go_rest_server_out=generated/genrest \
@@ -74,4 +73,4 @@ genrest:
 
 .PHONY: genopenapiyaml
 genopenapiyaml:
-	protoc -I ~/github/googleapis/googleapis -I=protos --openapi_out=protos server.proto 
+	protoc -I ~/.local/googleapis -I=protos --openapi_out=protos protos/server.proto 

@@ -23,10 +23,10 @@ $ curl  http://localhost:10000/v1/servers
 ## install
 
 ```bash
-wget https://github.com/protocolbuffers/protobuf/releases/download/v26.1/protoc-26.1-linux-x86_64.zip
+wget https://github.com/protocolbuffers/protobuf/releases/download/v28.2/protoc-28.2-linux-x86_64.zip
 
 	#https://grpc.io/docs/protoc-installation/
-	unzip protoc-26.1-linux-x86_64.zip -d $HOME/.local
+	unzip protoc-28.2-linux-x86_64.zip -d $HOME/.local
 	echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 	source ~/.bashrc
 	protoc --version
@@ -39,5 +39,10 @@ go install github.com/googleapis/gapic-generator-go/cmd/protoc-gen-go_cli@latest
 go install github.com/googleapis/gapic-generator-go/cmd/protoc-gen-go_gapic@latest
 go install github.com/googleapis/gapic-showcase/util/cmd/protoc-gen-go_rest_server@latest
 
+go install github.com/google/gnostic/cmd/protoc-gen-openapi@latest
+
 export PATH="$PATH:$(go env GOPATH)/bin"
+
+git clone --depth=1 https://github.com/googleapis/googleapis.git ~/.local/googleapis
+git clone --depth=1 https://github.com/googleapis/gapic-showcase.git ~/.local/gapic-showcase
 ```

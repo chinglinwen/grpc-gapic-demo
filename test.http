@@ -1,6 +1,6 @@
 # demo curl
 
-@address = 127.0.0.1:11000
+@address = 127.0.0.1:10000
 
 ### list
 GET /v1/servers

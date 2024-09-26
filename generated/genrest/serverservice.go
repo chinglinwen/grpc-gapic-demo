@@ -18,13 +18,13 @@
 package genrest
 
 import (
-	"context"
 	"net/http"
 	"github.com/googleapis/gapic-showcase/util/genrest/resttools"
 	gmux "github.com/gorilla/mux"
 	serverpb "core.wcloud.io/generated/grpcgen"
 	"bytes"
 	"io"
+	"context"
 )
 
 // HandleCreateServer translates REST requests/responses on the wire to internal proto messages for CreateServer
@@ -56,8 +56,8 @@ func (backend *RESTBackend) HandleCreateServer(w http.ResponseWriter, r *http.Re
 	var bodyField serverpb.Server
 	var jsonReader bytes.Buffer
 	bodyReader := io.TeeReader(r.Body, &jsonReader)
-	rBytes := make([]byte, r.ContentLength)
-	if _, err := bodyReader.Read(rBytes); err != nil && err != io.EOF {
+	rBytes, err := io.ReadAll(bodyReader)
+	if err != nil {
 		backend.Error(w, http.StatusBadRequest, "error reading body content: %s", err)
 		return
 	}
@@ -331,8 +331,8 @@ func (backend *RESTBackend) HandleMergeServers(w http.ResponseWriter, r *http.Re
 	// Intentional: Field values in the URL path override those set in the body.
 	var jsonReader bytes.Buffer
 	bodyReader := io.TeeReader(r.Body, &jsonReader)
-	rBytes := make([]byte, r.ContentLength)
-	if _, err := bodyReader.Read(rBytes); err != nil && err != io.EOF {
+	rBytes, err := io.ReadAll(bodyReader)
+	if err != nil {
 		backend.Error(w, http.StatusBadRequest, "error reading body content: %s", err)
 		return
 	}
@@ -406,8 +406,8 @@ func (backend *RESTBackend) HandleCreateDisk(w http.ResponseWriter, r *http.Requ
 	var bodyField serverpb.Disk
 	var jsonReader bytes.Buffer
 	bodyReader := io.TeeReader(r.Body, &jsonReader)
-	rBytes := make([]byte, r.ContentLength)
-	if _, err := bodyReader.Read(rBytes); err != nil && err != io.EOF {
+	rBytes, err := io.ReadAll(bodyReader)
+	if err != nil {
 		backend.Error(w, http.StatusBadRequest, "error reading body content: %s", err)
 		return
 	}
@@ -687,8 +687,8 @@ func (backend *RESTBackend) HandleUpdateDisk(w http.ResponseWriter, r *http.Requ
 	var bodyField serverpb.Disk
 	var jsonReader bytes.Buffer
 	bodyReader := io.TeeReader(r.Body, &jsonReader)
-	rBytes := make([]byte, r.ContentLength)
-	if _, err := bodyReader.Read(rBytes); err != nil && err != io.EOF {
+	rBytes, err := io.ReadAll(bodyReader)
+	if err != nil {
 		backend.Error(w, http.StatusBadRequest, "error reading body content: %s", err)
 		return
 	}
@@ -769,8 +769,8 @@ func (backend *RESTBackend) HandleMoveDisk(w http.ResponseWriter, r *http.Reques
 	// Intentional: Field values in the URL path override those set in the body.
 	var jsonReader bytes.Buffer
 	bodyReader := io.TeeReader(r.Body, &jsonReader)
-	rBytes := make([]byte, r.ContentLength)
-	if _, err := bodyReader.Read(rBytes); err != nil && err != io.EOF {
+	rBytes, err := io.ReadAll(bodyReader)
+	if err != nil {
 		backend.Error(w, http.StatusBadRequest, "error reading body content: %s", err)
 		return
 	}
